@@ -13,7 +13,7 @@ import ModalContent from "./ModalContent.vue";
                     Изменить товар
                 </h2>
 
-                <p class="modal__header-id">id:{{ modalEditData.id }}</p>
+                <p class="modal__header-id">id:{{ modalEditData?.id }}</p>
                 <img
                         class="modal__close"
                         src="@/assets/images/close.svg"

@@ -1,6 +1,6 @@
 <script setup lang="ts">
 
-import {modalAddOpen, modalImageData, modalImageOpen} from "../../store.ts";
+import {modalImageData, modalImageOpen} from "../../store.ts";
 </script>
 
 <template>

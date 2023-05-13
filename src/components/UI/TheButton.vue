@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import {IProduct} from "../../interfaces/IProduct.ts";
 
 const props = defineProps<{
     text:string
@@ -7,7 +6,7 @@ const props = defineProps<{
 </script>
 
 <template>
-    <button class="button">{{text}}</button>
+    <button class="button">{{props.text}}</button>
 </template>
 
 <style scoped lang="scss">

@@ -3,7 +3,7 @@ import {IProduct} from "../../interfaces/IProduct.ts";
 import {modalEditData, modalImageData, modalImageOpen, products} from "../../store.ts";
 import {modalEditOpen} from "../../store.ts";
 
-const props = defineProps<{
+defineProps<{
     product: IProduct
 }>();
 

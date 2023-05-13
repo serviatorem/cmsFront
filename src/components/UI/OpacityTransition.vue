@@ -3,9 +3,9 @@
 </script>
 
 <template>
-  <transition class="opacity" :class="open">
+  <Transition>
       <slot/>
-  </transition>
+  </Transition>
 </template>
 
 <style scoped lang="scss">
