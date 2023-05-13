@@ -1,5 +1,5 @@
 import {IProduct} from "./interfaces/IProduct.ts";
-import {reactive, ref} from "vue";
+import {ref} from "vue";
 
 
 export const modalEditOpen = ref<boolean>(false);

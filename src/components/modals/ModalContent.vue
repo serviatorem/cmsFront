@@ -3,7 +3,7 @@ import {IProduct} from "../../interfaces/IProduct.ts";
 import TheTotal from "../UI/TheTotal.vue";
 import TheButton from "../UI/TheButton.vue";
 import {ref, watchEffect} from "vue";
-import {modalAddOpen, modalEditOpen, products, setProducts} from "../../store.ts";
+import {modalAddOpen, modalEditOpen, setProducts} from "../../store.ts";
 
 const props = defineProps<{
     product?: IProduct
@@ -32,10 +32,10 @@ const productAdd = () => {
             description: description.value,
             image: image.value
         })
-        const editedProducts = JSON.parse(localStorage.getItem('products'));
+        const editedProducts = JSON.parse(localStorage.getItem('products') || "{}");
         console.log(product);
         console.log(props.product);
-        const editedItemIndex = editedProducts.findIndex(el => el.id === props.product?.id);
+        const editedItemIndex = editedProducts.findIndex((el:IProduct) => el.id === props.product?.id);
         editedProducts.splice(editedItemIndex, 1)
         editedProducts.splice(editedItemIndex,0,product)
         setProducts(editedProducts)
@@ -52,7 +52,7 @@ const productAdd = () => {
             description: description.value,
             image: image.value
         }
-        const updateProducts = JSON.parse(localStorage.getItem('products'));
+        const updateProducts = JSON.parse(localStorage.getItem('products') || "{}");
         updateProducts.unshift(product)
         setProducts(updateProducts);
         modalAddOpen.value = false;

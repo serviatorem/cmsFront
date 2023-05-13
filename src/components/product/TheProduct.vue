@@ -1,18 +1,21 @@
 <script setup lang="ts">
 import {IProduct} from "../../interfaces/IProduct.ts";
-import {modalEditData, modalImageData, modalImageOpen, products, setProducts} from "../../store.ts";
+import {modalEditData, modalImageData, modalImageOpen, setProducts} from "../../store.ts";
 import {modalEditOpen} from "../../store.ts";
 
 const props = defineProps<{
     product: IProduct
 }>();
 const deleteItem = () => {
-    const productTemp = JSON.parse(localStorage.getItem('products'))
-    const productFilter = productTemp.filter(item => {
-        return item.id !== props.product.id
-    })
+    if (localStorage.getItem('products')){
+        const productTemp = JSON.parse(localStorage.getItem('products') || '{}')
+        const productFilter = productTemp.filter((item:IProduct) => {
+            return item.id !== props.product.id
+        })
 
-    setProducts(productFilter);
+        setProducts(productFilter);
+    }
+
 }
 </script>
 
