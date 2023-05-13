@@ -3,7 +3,7 @@ import {IProduct} from "../../interfaces/IProduct.ts";
 import TheTotal from "../UI/TheTotal.vue";
 import TheButton from "../UI/TheButton.vue";
 import {ref, watchEffect} from "vue";
-import {modalAddOpen, modalEditOpen, products} from "../../store.ts";
+import {modalAddOpen, modalEditOpen, products, setProducts} from "../../store.ts";
 
 const props = defineProps<{
     product?: IProduct
@@ -21,7 +21,7 @@ const image = ref(props.product?.image || '');
 
 const productAdd = () => {
     if (props.product) {
-        const product: IProduct = {
+        const product: IProduct = ({
             id: props.product?.id || 0,
             name: name.value,
             category: category.value,
@@ -31,8 +31,14 @@ const productAdd = () => {
             discont: discont.value,
             description: description.value,
             image: image.value
-        }
-        products.value.splice(products.value.indexOf(props.product, 0), 1, product)
+        })
+        const editedProducts = JSON.parse(localStorage.getItem('products'));
+        console.log(product);
+        console.log(props.product);
+        const editedItemIndex = editedProducts.findIndex(el => el.id === props.product?.id);
+        editedProducts.splice(editedItemIndex, 1)
+        editedProducts.splice(editedItemIndex,0,product)
+        setProducts(editedProducts)
         modalEditOpen.value = false;
     } else {
         const product: IProduct = {
@@ -46,7 +52,9 @@ const productAdd = () => {
             description: description.value,
             image: image.value
         }
-        products.value.unshift(product);
+        const updateProducts = JSON.parse(localStorage.getItem('products'));
+        updateProducts.unshift(product)
+        setProducts(updateProducts);
         modalAddOpen.value = false;
     }
 }

@@ -1,5 +1,5 @@
 import {IProduct} from "./interfaces/IProduct.ts";
-import {ref} from "vue";
+import {reactive, ref} from "vue";
 
 
 export const modalEditOpen = ref<boolean>(false);
@@ -10,6 +10,7 @@ export const modalImageData = ref<string>();
 
 export const productsVisionPage = ref<number>(1);
 export const productCountToShow = ref<number>(10);
+
 
 export const products = ref<IProduct[]>([
     {
@@ -300,3 +301,14 @@ export const products = ref<IProduct[]>([
     },
 
 ])
+
+export const setProducts = (payload:Array<IProduct>)=>{
+    products.value = payload;
+    localStorage.setItem('products',JSON.stringify(products.value));
+}
+if (!localStorage.getItem('products')){
+    localStorage.setItem('products',JSON.stringify(products.value))
+}else{
+    // @ts-ignore
+    products.value = JSON.parse(localStorage.getItem('products'))
+}

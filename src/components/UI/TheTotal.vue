@@ -8,10 +8,9 @@ const props = defineProps<{
 const total = ref<number>(0);
 if (props.products){
     watchEffect(() => {
-        const products = props?.products;
         total.value = 0;
-        if (products) {
-            products.forEach(item => {
+        if (props.products) {
+            props.products.forEach(item => {
                 total.value += item.cost * (100 - item.discont) / 100 * item.quantity;
             })
         }

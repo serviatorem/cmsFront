@@ -1,12 +1,19 @@
 <script setup lang="ts">
 import {IProduct} from "../../interfaces/IProduct.ts";
-import {modalEditData, modalImageData, modalImageOpen, products} from "../../store.ts";
+import {modalEditData, modalImageData, modalImageOpen, products, setProducts} from "../../store.ts";
 import {modalEditOpen} from "../../store.ts";
 
-defineProps<{
+const props = defineProps<{
     product: IProduct
 }>();
+const deleteItem = () => {
+    const productTemp = JSON.parse(localStorage.getItem('products'))
+    const productFilter = productTemp.filter(item => {
+        return item.id !== props.product.id
+    })
 
+    setProducts(productFilter);
+}
 </script>
 
 <template>
@@ -16,8 +23,8 @@ defineProps<{
         <p class="product__item">{{ product.category }}</p>
         <p class="product__item">{{ product.unit }}</p>
         <p class="product__item">{{ product.quantity }}</p>
-        <p class="product__item">${{ product.cost * (100 - product.discont)/100 }}</p>
-        <p class="product__item">${{ product.cost * (100 - product.discont)/100 * product.quantity }}</p>
+        <p class="product__item">${{ product.cost * (100 - product.discont) / 100 }}</p>
+        <p class="product__item">${{ product.cost * (100 - product.discont) / 100 * product.quantity }}</p>
         <img
                 @click="modalImageOpen = true;modalImageData = product.image"
                 class="product__image image"
@@ -31,9 +38,7 @@ defineProps<{
                 alt="edit"
         >
         <img
-                @click="products = products.filter(item =>{
-            return item.id !== product.id;
-        })"
+                @click="deleteItem()"
                 class="product__image delete"
                 src="@/assets/images/ant-design_delete-outlined.svg"
                 alt="delete"

@@ -1,12 +1,13 @@
 <script setup lang="ts">
 
-import {products} from "../../store.ts";
+
 import {
     productsVisionPageUp,
     productsVisionPageDown,
     productIndexThatStartShow,
     productIndexThatEndShow
 } from "../../pagination.ts";
+import {products} from "../../store.ts";
 
 
 

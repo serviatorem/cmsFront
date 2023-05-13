@@ -3,6 +3,7 @@
 
 import TheTotal from "./UI/TheTotal.vue";
 import {products} from "../store.ts";
+
 </script>
 
 <template>
