@@ -1,0 +1,29 @@
+<script setup lang="ts">
+import {IProduct} from "../../interfaces/IProduct.ts";
+
+const props = defineProps<{
+    text:string
+}>();
+</script>
+
+<template>
+    <button class="button">{{text}}</button>
+</template>
+
+<style scoped lang="scss">
+@import "@/assets/css/variables";
+.button{
+  font-style: normal;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 19px;
+  text-transform: uppercase;
+  padding: 10px 15px;
+  color: #FFFFFF;
+  border-radius: 6px;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  background: $button-color;
+}
+</style>
