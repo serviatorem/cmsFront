@@ -9,6 +9,7 @@ watch(searchedText,()=>{
         return item.name.includes(searchedText.value)
     })
 })
+
 </script>
 
 <template>

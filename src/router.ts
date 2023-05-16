@@ -3,6 +3,9 @@ import {createRouter, createWebHistory} from "vue-router";
 import CmsPage from "@/components/pages/CmsPage.vue";
 // @ts-ignore
 import AuthPage from "@/components/pages/AuthPage.vue";
+// @ts-ignore
+// @ts-ignore
+import RegPage from "@/components/pages/RegPage.vue";
 
 const routes = [
     {
@@ -15,6 +18,11 @@ const routes = [
         path: '/login',
         name: 'login',
         component: AuthPage
+    },
+    {
+        path: '/registration',
+        name: 'registration',
+        component: RegPage
     }
 ];
 
