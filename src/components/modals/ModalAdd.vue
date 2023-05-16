@@ -10,7 +10,7 @@ import ModalContent from "./ModalContent.vue";
             <div class="modal__header">
 
                 <h2 class="modal__header-title">
-                    Добавить товар
+                    Добавить запись
                 </h2>
 
                 <img

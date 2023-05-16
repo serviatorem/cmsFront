@@ -10,13 +10,10 @@ const props = defineProps<{
 }>();
 const productTotal = ref<number>(0);
 const cost = ref(props.product?.cost || 0);
-const quantity = ref(props.product?.quantity || 0);
-const discont = ref((props.product?.discont) || 0);
-const checked = ref<boolean>(true);
+const income = ref(props.product?.income || 'Выберите тип');
 const name = ref(props.product?.name || '');
 const description = ref(props.product?.description || '');
 const category = ref(props.product?.category || '');
-const unit = ref(props.product?.unit || '');
 const image = ref(props.product?.image || '');
 
 const productAdd = () => {
@@ -25,10 +22,8 @@ const productAdd = () => {
             id: props.product?.id || 0,
             name: name.value,
             category: category.value,
-            unit: unit.value,
-            quantity: quantity.value,
+            income: income.value,
             cost: cost.value,
-            discont: discont.value,
             description: description.value,
             image: image.value
         })
@@ -45,10 +40,8 @@ const productAdd = () => {
             id: Math.floor(Date.now() / 1000) + Math.floor(Math.random() * 100000000),
             name: name.value,
             category: category.value,
-            unit: unit.value,
-            quantity: quantity.value,
+            income: income.value,
             cost: cost.value,
-            discont: discont.value,
             description: description.value,
             image: image.value
         }
@@ -58,7 +51,7 @@ const productAdd = () => {
         modalAddOpen.value = false;
     }
 }
-watchEffect(()=>{productTotal.value = cost.value * quantity.value * (100 - discont.value) / 100;})
+watchEffect(()=>{productTotal.value = cost.value})
 </script>
 
 <template>
@@ -86,38 +79,15 @@ watchEffect(()=>{productTotal.value = cost.value * quantity.value * (100 - disco
             </label>
 
             <label class="modalContent__label">
-                Единицы измерения
-                <input
-                        type="text"
-                        class="modalContent__input unit"
-                        v-model="unit">
-            </label>
-            <label class="modalContent__label">
-                Количество
-                <input
-                        type="text"
-                        class="modalContent__input quantity"
-                        v-model="quantity"
+                Тип
+                <select
+                        class="modalContent__input income"
+                        v-model="income"
                 >
-            </label>
-
-            <label class="modalContent__label">
-                Дисконт
-                <span class="discont__label">
-                                    <input
-                                            type="checkbox"
-                                            id="check"
-
-                                            v-model="checked"
-                                    >
-                                    <label for="check" class="discont__checkbox"></label>
-                <input
-                        :disabled="!checked"
-                        type="text"
-                        class="modalContent__input discont"
-                        v-model="discont"
-                >
-                </span>
+                    <option value="Выберите тип" selected>Выберите тип</option>
+                    <option value="Доход">Доход</option>
+                    <option value="Расход">Расход</option>
+                </select>
             </label>
             <label class="modalContent__label">
                 Цена
@@ -140,6 +110,7 @@ watchEffect(()=>{productTotal.value = cost.value * quantity.value * (100 - disco
             <TheTotal
                     :product='product'
                     :productTotal='productTotal'
+                    text = 'итоговая цена'
             />
             <TheButton
                     text="Добавить товар"

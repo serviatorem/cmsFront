@@ -2,32 +2,39 @@
 import {IProduct} from "../../interfaces/IProduct.ts";
 import {modalEditData, modalImageData, modalImageOpen, setProducts} from "../../store.ts";
 import {modalEditOpen} from "../../store.ts";
+import {computed, ref} from "vue";
+import ProductDescription from "./ProductDescription.vue";
 
+const openDescription = ref<boolean>(false);
 const props = defineProps<{
     product: IProduct
 }>();
 const deleteItem = () => {
-    if (localStorage.getItem('products')){
+    if (localStorage.getItem('products')) {
         const productTemp = JSON.parse(localStorage.getItem('products') || '{}')
-        const productFilter = productTemp.filter((item:IProduct) => {
+        const productFilter = productTemp.filter((item: IProduct) => {
             return item.id !== props.product.id
         })
 
         setProducts(productFilter);
     }
-
 }
+
+const possibleOpenDescription = computed(() => {
+    return openDescription.value && props.product.description
+})
 </script>
 
 <template>
-    <div class="product">
+    <div
+            class="product"
+            @click="openDescription = !openDescription"
+    >
         <p class="product__item">{{ product.id }}</p>
         <p class="product__item">{{ product.name }}</p>
         <p class="product__item">{{ product.category }}</p>
-        <p class="product__item">{{ product.unit }}</p>
-        <p class="product__item">{{ product.quantity }}</p>
-        <p class="product__item">${{ product.cost * (100 - product.discont) / 100 }}</p>
-        <p class="product__item">${{ product.cost * (100 - product.discont) / 100 * product.quantity }}</p>
+        <p class="product__item">{{ product.income }}</p>
+        <p class="product__item">${{ product.cost }}</p>
         <img
                 @click="modalImageOpen = true;modalImageData = product.image"
                 class="product__image image"
@@ -47,17 +54,21 @@ const deleteItem = () => {
                 alt="delete"
         >
     </div>
+    <ProductDescription
+            :description="product.description"
+            v-if="possibleOpenDescription"
+    />
 </template>
 
 <style scoped lang="scss">
-@import "@/assets/css/variables";
 
 .product {
-  padding: 15px;
+  padding: 15px 15px 0;
   gap: 20px;
   width: 100%;
   display: grid;
-  grid-template-columns: 1fr 290px repeat(5, 1fr) 20px 20px 20px;
+  cursor: pointer;
+  grid-template-columns: 1fr 290px repeat(3, 1fr) 20px 20px 20px;
 
   &__item {
     font-style: normal;

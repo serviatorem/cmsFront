@@ -9,10 +9,8 @@ import TheProducts from "../product/TheProducts.vue";
         <p class="body__header-item">id</p>
         <p class="body__header-item">наименование</p>
         <p class="body__header-item">категория</p>
-        <p class="body__header-item">ед/изм</p>
-        <p class="body__header-item">количество</p>
+        <p class="body__header-item">тип</p>
         <p class="body__header-item">цена</p>
-        <p class="body__header-item">итог</p>
     </div>
       <TheProducts/>
   </div>
@@ -27,7 +25,7 @@ import TheProducts from "../product/TheProducts.vue";
       width: 100%;
       gap:20px;
       display: grid;
-      grid-template-columns: 1fr 290px repeat(5,1fr) 20px 20px 20px;
+      grid-template-columns: 1fr 290px repeat(3,1fr) 20px 20px 20px;
       background: $background-color;
 
       &-item{

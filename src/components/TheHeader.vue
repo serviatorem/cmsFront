@@ -10,7 +10,7 @@ import {products} from "../store.ts";
   <header class="header">
       <h1 class="header__title">CMS</h1>
       <div class="header__total">
-          <TheTotal :products='products'/>
+          <TheTotal :products='products' text = 'Итоговая прибыль'/>
       </div>
   </header>
 </template>
@@ -33,6 +33,13 @@ import {products} from "../store.ts";
       letter-spacing: 0.1em;
       text-transform: uppercase;
       color:$base-color;
+    }
+    &__total{
+      display: flex;
+      align-items: center;
+      width: 100%;
+      justify-content: right;
+      gap: 20px;
     }
   }
 </style>

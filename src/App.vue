@@ -5,7 +5,7 @@ import CmsPage from "./components/pages/CmsPage.vue";
 
 <template>
   <div class="container">
-    <CmsPage/>
+    <RouterView/>
   </div>
 </template>
 

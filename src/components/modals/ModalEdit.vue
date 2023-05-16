@@ -10,7 +10,7 @@ import ModalContent from "./ModalContent.vue";
             <div class="modal__header">
 
                 <h2 class="modal__header-title">
-                    Изменить товар
+                    Изменить запись
                 </h2>
 
                 <p class="modal__header-id">id:{{ modalEditData?.id }}</p>
